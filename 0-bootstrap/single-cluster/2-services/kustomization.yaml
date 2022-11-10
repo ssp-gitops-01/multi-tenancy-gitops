@@ -1,9 +1,9 @@
 resources:
 # IBM Software
 - argocd/instances/sealed-secrets.yaml
-- argocd/instances/ibm-sfg-db2-prod.yaml
-- argocd/instances/ibm-sfg-mq-prod.yaml
-- argocd/instances/ibm-sfg-b2bi-prod-setup.yaml
+# - argocd/instances/ibm-sfg-db2-prod.yaml
+# - argocd/instances/ibm-sfg-mq-prod.yaml
+# - argocd/instances/ibm-sfg-b2bi-prod-setup.yaml
 ## Cloud Pak for Integration
 #- argocd/operators/ibm-ace-operator.yaml
 #- argocd/operators/ibm-apic-operator.yaml
@@ -156,10 +156,10 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
+      value: https://github.com/ssp-gitops-01/multi-tenancy-gitops-services.git
     - op: add
       path: /spec/source/targetRevision
-      value: ${GIT_GITOPS_SERVICES_BRANCH}
+      value: master
 - target:
     group: argoproj.io
     kind: Application
@@ -167,10 +167,10 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_APPLICATIONS}
+      value: https://github.com/ssp-gitops-01/multi-tenancy-gitops-apps.git
     - op: add
       path: /spec/source/targetRevision
-      value: ${GIT_GITOPS_APPLICATIONS_BRANCH}
+      value: master
 - target:
     group: argoproj.io
     kind: Application
@@ -178,7 +178,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: ${HELM_REPOURL}
+      value: https://charts.cloudnativetoolkit.dev
 - target:
     name: ibm-automation-foundation-operator
   patch: |-
